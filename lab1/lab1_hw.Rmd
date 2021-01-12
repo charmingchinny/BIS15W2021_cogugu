@@ -58,16 +58,16 @@ pi <- 3.14159265359
 
 **9. Let's calculate the mean for the numbers 2, 8, 6, 4, 9, 10. I have built an object `x` for you below so all you need to do is run the first code chunk and then create a second code chunk that shows the calculation. Give it a try!**  
 ```{r}
-x <-c(2, 8, 6, 6, 7, 4, 9, 9, 9, 10)
+x <- c(2, 8, 6, 6, 7, 4, 9, 9, 9, 10)
 ```
 ```{r}
-mean(c)
+mean(x)
 ```
 
 **10. Repeat the procedure above, but this time calculate the median.**  
 ```{r}
 ?median
-median(c)
+median(x)
 ```
 
 
