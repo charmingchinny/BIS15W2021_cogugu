@@ -1,7 +1,7 @@
 ---
 title: "Lab 4 Homework"
 author: "Chinyere Ogugu"
-date: "2021-01-21"
+date: "2021-01-24"
 output:
   html_document: 
     theme: spacelab
@@ -28,15 +28,18 @@ For the homework, we will use data about vertebrate home range sizes. The data a
 Reference: Tamburello N, Cote IM, Dulvy NK (2015) Energy and the scaling of animal space use. The American Naturalist 186(2):196-211. http://dx.doi.org/10.1086/682070.  
 Data: http://datadryad.org/resource/doi:10.5061/dryad.q5j65/1  
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 **1. Load the data into a new object called `homerange`.**
 
 ```r
-homerange <- readr::read_csv("~/Desktop/BIS15W2021_cogugu/lab4/data/Tamburelloetal_HomeRangeDatabase.csv")
+homerange <- readr::read_csv("data/Tamburelloetal_HomeRangeDatabase.csv")
 ```
 
 ```
-## 
-## ── Column specification ────────────────────────────────────────────────────────
+## Parsed with column specification:
 ## cols(
 ##   .default = col_character(),
 ##   mean.mass.g = col_double(),
@@ -47,8 +50,15 @@ homerange <- readr::read_csv("~/Desktop/BIS15W2021_cogugu/lab4/data/Tamburelloet
 ##   log10.preymass = col_double(),
 ##   PPMR = col_double()
 ## )
-## ℹ Use `spec()` for the full column specifications.
 ```
+
+```
+## See spec(...) for full column specifications.
+```
+</div>
+
+_There were some directory issues here. Remember, you want to include the data so that other folks can run your code. I have added a data folder and adjusted the path so your code can run._
+
 **2. Explore the data. Show the dimensions, column names, classes for each variable, and a statistical summary. Keep these as separate code chunks.**  
 
 ```r
@@ -58,6 +68,7 @@ dim(homerange)
 ```
 ## [1] 569  24
 ```
+
 
 ```r
 colnames(homerange)
@@ -77,6 +88,7 @@ colnames(homerange)
 ## [21] "preymass"                   "log10.preymass"            
 ## [23] "PPMR"                       "prey.size.reference"
 ```
+
 
 ```r
 t(t(sapply(homerange,class)))
@@ -110,13 +122,14 @@ t(t(sapply(homerange,class)))
 ## prey.size.reference        "character"
 ```
 
+
 ```r
 glimpse(homerange)
 ```
 
 ```
-## Rows: 569
-## Columns: 24
+## Observations: 569
+## Variables: 24
 ## $ taxon                      <chr> "lake fishes", "river fishes", "river fish…
 ## $ common.name                <chr> "american eel", "blacktail redhorse", "cen…
 ## $ class                      <chr> "actinopterygii", "actinopterygii", "actin…
@@ -142,6 +155,7 @@ glimpse(homerange)
 ## $ PPMR                       <dbl> NA, NA, NA, NA, NA, NA, 530, NA, NA, NA, N…
 ## $ prey.size.reference        <chr> NA, NA, NA, NA, NA, NA, "Brose U, et al. 2…
 ```
+
 
 ```r
 summary(homerange)
@@ -221,6 +235,7 @@ class(homerange$taxon)
 ## [1] "factor"
 ```
 
+
 ```r
 levels(homerange$taxon)
 ```
@@ -231,6 +246,7 @@ levels(homerange$taxon)
 ## [9] "turtles"
 ```
 
+
 ```r
 homerange$order<- as.factor(homerange$order)
 class(homerange$order)
@@ -239,6 +255,7 @@ class(homerange$order)
 ```
 ## [1] "factor"
 ```
+
 
 ```r
 levels(homerange$order)
@@ -314,18 +331,15 @@ table(homerange$trophic.guild)
 ##       342       227
 ```
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 **7. Make two new data frames, one which is restricted to carnivores and another that is restricted to herbivores.**  
 
 ```r
 carnivores<- filter(homerange, trophic.guild=="carnivore")
-data_frame(carnivores)
-```
-
-```
-## Warning: `data_frame()` is deprecated as of tibble 1.1.0.
-## Please use `tibble()` instead.
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_warnings()` to see where this warning was generated.
+carnivores
 ```
 
 ```
@@ -349,9 +363,10 @@ data_frame(carnivores)
 ## #   log10.preymass <dbl>, PPMR <dbl>, prey.size.reference <chr>
 ```
 
+
 ```r
 herbivores<- filter(homerange, trophic.guild=="herbivore")
-data_frame(herbivores)
+herbivores
 ```
 
 ```
@@ -374,6 +389,7 @@ data_frame(herbivores)
 ## #   locomotion <chr>, trophic.guild <chr>, dimension <chr>, preymass <dbl>,
 ## #   log10.preymass <dbl>, PPMR <dbl>, prey.size.reference <chr>
 ```
+</div>
 
 **8. Do herbivores or carnivores have, on average, a larger `mean.hra.m2`? Remove any NAs from the data.**  Herbivores have the larger mean.hra.m2 on average. 
 
@@ -402,7 +418,7 @@ colMeans(herbivore.hra, na.rm=T)
 ```r
 deer<- select(homerange, "mean.mass.g", "log10.mass", "family", "genus", "species")
 deer<- filter(deer, family=="cervidae")
-data_frame(deer)
+deer
 ```
 
 ```
@@ -428,23 +444,23 @@ data_frame(deer)
 ```r
 snakes<- filter(homerange, taxon=="snakes")
 snakes<-select(snakes, "common.name","mean.hra.m2")
-arrange(snakes)
+arrange(snakes, mean.hra.m2)# when you arrange you need to identify the variable
 ```
 
 ```
 ## # A tibble: 41 x 2
-##    common.name           mean.hra.m2
-##    <chr>                       <dbl>
-##  1 western worm snake            700
-##  2 eastern worm snake            253
-##  3 racer                      151000
-##  4 yellow bellied racer       114500
-##  5 ringneck snake               6476
-##  6 eastern indigo snake      1853000
-##  7 great plains ratsnake      150600
-##  8 western ratsnake            46000
-##  9 hognose snake              516375
-## 10 European whipsnake         110900
+##    common.name          mean.hra.m2
+##    <chr>                      <dbl>
+##  1 namaqua dwarf adder         200 
+##  2 eastern worm snake          253 
+##  3 butlers garter snake        600 
+##  4 western worm snake          700 
+##  5 snubnosed viper            2400 
+##  6 chinese pit viper          2614.
+##  7 ringneck snake             6476 
+##  8 cottonmouth               10655 
+##  9 redbacked ratsnake        15400 
+## 10 gopher snake              17400 
 ## # … with 31 more rows
 ```
 

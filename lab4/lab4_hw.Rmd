@@ -29,23 +29,35 @@ For the homework, we will use data about vertebrate home range sizes. The data a
 Reference: Tamburello N, Cote IM, Dulvy NK (2015) Energy and the scaling of animal space use. The American Naturalist 186(2):196-211. http://dx.doi.org/10.1086/682070.  
 Data: http://datadryad.org/resource/doi:10.5061/dryad.q5j65/1  
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 **1. Load the data into a new object called `homerange`.**
 ```{r}
-homerange <- readr::read_csv("~/Desktop/BIS15W2021_cogugu/lab4/data/Tamburelloetal_HomeRangeDatabase.csv")
+homerange <- readr::read_csv("data/Tamburelloetal_HomeRangeDatabase.csv")
 ```
+</div>
+
+_There were some directory issues here. Remember, you want to include the data so that other folks can run your code. I have added a data folder and adjusted the path so your code can run._
+
 **2. Explore the data. Show the dimensions, column names, classes for each variable, and a statistical summary. Keep these as separate code chunks.**  
 ```{r}
 dim(homerange)
 ```
+
 ```{r}
 colnames(homerange)
 ```
+
 ```{r}
 t(t(sapply(homerange,class)))
 ```
+
 ```{r}
 glimpse(homerange)
 ```
+
 ```{r}
 summary(homerange)
 ```
@@ -57,13 +69,18 @@ homerange$taxon<- as.factor(homerange$taxon)
 
 ```{r}
 class(homerange$taxon)
+```
 
+```{r}
 levels(homerange$taxon)
 ```
+
 ```{r}
 homerange$order<- as.factor(homerange$order)
 class(homerange$order)
+```
 
+```{r}
 levels(homerange$order)
 ```
 
@@ -83,15 +100,21 @@ table(homerange$taxon)
 table(homerange$trophic.guild)
 ```
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 **7. Make two new data frames, one which is restricted to carnivores and another that is restricted to herbivores.**  
 ```{r}
 carnivores<- filter(homerange, trophic.guild=="carnivore")
-data_frame(carnivores)
+carnivores
 ```
+
 ```{r}
 herbivores<- filter(homerange, trophic.guild=="herbivore")
-data_frame(herbivores)
+herbivores
 ```
+</div>
 
 **8. Do herbivores or carnivores have, on average, a larger `mean.hra.m2`? Remove any NAs from the data.**  Herbivores have the larger mean.hra.m2 on average. 
 ```{r}
@@ -107,14 +130,14 @@ colMeans(herbivore.hra, na.rm=T)
 ```{r}
 deer<- select(homerange, "mean.mass.g", "log10.mass", "family", "genus", "species")
 deer<- filter(deer, family=="cervidae")
-data_frame(deer)
+deer
 ```
 
 **10. As measured by the data, which snake species has the smallest homerange? Show all of your work, please. Look this species up online and tell me about it!** **Snake is found in taxon column**    
 ```{r}
 snakes<- filter(homerange, taxon=="snakes")
 snakes<-select(snakes, "common.name","mean.hra.m2")
-arrange(snakes)
+arrange(snakes, mean.hra.m2)# when you arrange you need to identify the variable
 ```
 ```{r}
 meanhra<- as.numeric(snakes$mean.hra.m2) 
