@@ -129,11 +129,17 @@ filter(superheroinfo, height >=300)
 filter(superheroinfo, weight >=450)
 ```
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
 ## Height to Weight Ratio
 13. It's easy to be strong when you are heavy and tall, but who is heavy and short? Which superheros have the highest height to weight ratio?
 ```{r}
 superheroinfo %>% arrange(desc(height)) %>% arrange(., weight)
 ```
+</div>
 
 ## `superhero_powers`
 Have a quick look at the `superhero_powers` data frame.  
@@ -145,12 +151,17 @@ superhero_powers2
 ```{r}
 filter(superhero_powers2, accelerated_healing == "TRUE", durability == "TRUE", super_strength=="TRUE")
 ```
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 ## `kinesis`
 15. We are only interested in the superheros that do some kind of "kinesis". How would we isolate them from the `superhero_powers` data?
 ```{r}
 select(superhero_powers2,hero_names, contains("kinesis")) 
 ```
+</div>
 
 16. Pick your favorite superhero and let's see their powers!
 ```{r}
