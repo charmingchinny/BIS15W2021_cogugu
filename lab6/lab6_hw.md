@@ -1,7 +1,7 @@
 ---
 title: "Lab 6 Homework"
 author: "Chinyere ogugu"
-date: "2021-01-26"
+date: "2021-01-27"
 output:
   html_document: 
     theme: spacelab
@@ -32,7 +32,7 @@ getwd()
 ```
 
 ```
-## [1] "/Users/chinyereogugu/Desktop/BIS15W2021_cogugu/lab6"
+## [1] "D:/TA files/Winter2021 BIS15L/students_rep/BIS15W2021_cogugu/lab6"
 ```
 
 ```r
@@ -41,13 +41,13 @@ fisheries<-readr::read_csv("data/FAO_1950to2012_111914.csv")
 
 ```
 ## 
-## ── Column specification ────────────────────────────────────────────────────────
+## -- Column specification --------------------------------------------------------
 ## cols(
 ##   .default = col_character(),
 ##   `ISSCAAP group#` = col_double(),
 ##   `FAO major fishing area` = col_double()
 ## )
-## ℹ Use `spec()` for the full column specifications.
+## i Use `spec()` for the full column specifications.
 ```
 
 1. Do an exploratory analysis of the data (your choice). What are the names of the variables, what are the dimensions, are there any NA's, what are the classes of the variables?  
@@ -215,8 +215,8 @@ countries
 ##  [37] Congo, Dem. Rep. of the   Congo, Republic of       
 ##  [39] Cook Islands              Costa Rica               
 ##  [41] Croatia                   Cuba                     
-##  [43] Cura\xe7ao                Cyprus                   
-##  [45] C\xf4te d'Ivoire          Denmark                  
+##  [43] Cura<e7>ao                Cyprus                   
+##  [45] C<f4>te d'Ivoire          Denmark                  
 ##  [47] Djibouti                  Dominica                 
 ##  [49] Dominican Republic        Ecuador                  
 ##  [51] Egypt                     El Salvador              
@@ -268,7 +268,7 @@ countries
 ## [143] Poland                    Portugal                 
 ## [145] Puerto Rico               Qatar                    
 ## [147] Romania                   Russian Federation       
-## [149] R\xe9union                Saint Barth\xe9lemy      
+## [149] R<e9>union                Saint Barth<e9>lemy      
 ## [151] Saint Helena              Saint Kitts and Nevis    
 ## [153] Saint Lucia               Saint Vincent/Grenadines 
 ## [155] SaintMartin               Samoa                    
@@ -320,19 +320,19 @@ fisheries_tidy %>%
 
 ```
 ## # A tibble: 376,771 x 6
-##    country isscaap_taxonomic_g… asfis_species_na… asfis_species_num…  year catch
+##    country isscaap_taxonomic_g~ asfis_species_na~ asfis_species_num~  year catch
 ##    <fct>   <chr>                <chr>             <fct>              <dbl> <dbl>
-##  1 Albania Sharks, rays, chima… Squatinidae       10903XXXXX          1995    NA
-##  2 Albania Sharks, rays, chima… Squatinidae       10903XXXXX          1996    53
-##  3 Albania Sharks, rays, chima… Squatinidae       10903XXXXX          1997    20
-##  4 Albania Sharks, rays, chima… Squatinidae       10903XXXXX          1998    31
-##  5 Albania Sharks, rays, chima… Squatinidae       10903XXXXX          1999    30
-##  6 Albania Sharks, rays, chima… Squatinidae       10903XXXXX          2000    30
-##  7 Albania Sharks, rays, chima… Squatinidae       10903XXXXX          2001    16
-##  8 Albania Sharks, rays, chima… Squatinidae       10903XXXXX          2002    79
-##  9 Albania Sharks, rays, chima… Squatinidae       10903XXXXX          2003     1
-## 10 Albania Sharks, rays, chima… Squatinidae       10903XXXXX          2004     4
-## # … with 376,761 more rows
+##  1 Albania Sharks, rays, chima~ Squatinidae       10903XXXXX          1995    NA
+##  2 Albania Sharks, rays, chima~ Squatinidae       10903XXXXX          1996    53
+##  3 Albania Sharks, rays, chima~ Squatinidae       10903XXXXX          1997    20
+##  4 Albania Sharks, rays, chima~ Squatinidae       10903XXXXX          1998    31
+##  5 Albania Sharks, rays, chima~ Squatinidae       10903XXXXX          1999    30
+##  6 Albania Sharks, rays, chima~ Squatinidae       10903XXXXX          2000    30
+##  7 Albania Sharks, rays, chima~ Squatinidae       10903XXXXX          2001    16
+##  8 Albania Sharks, rays, chima~ Squatinidae       10903XXXXX          2002    79
+##  9 Albania Sharks, rays, chima~ Squatinidae       10903XXXXX          2003     1
+## 10 Albania Sharks, rays, chima~ Squatinidae       10903XXXXX          2004     4
+## # ... with 376,761 more rows
 ```
 
 5. Based on the asfis_species_number, how many distinct fish species were caught as part of these data? 
@@ -657,6 +657,10 @@ species
 ## [1551] 3161003201    2290119701    2290100113   
 ## 1553 Levels: 1020100101 1020100201 10201XXXXX 1030300603 ... 699XXXXXXX
 ```
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 6. Which country had the largest overall catch in the year 2000?
 China 
@@ -682,7 +686,7 @@ fisheries_tidy %>%
 ##  8 United States of America  2000  2438
 ##  9 China                     2000  1234
 ## 10 Philippines               2000   999
-## # … with 8,783 more rows
+## # ... with 8,783 more rows
 ```
 
 7. Which country caught the most sardines (_Sardina pilchardus_) between the years 1990-2000?
@@ -710,7 +714,7 @@ fisheries_tidy %>%
 ##  8 Morocco            Sardina pilchardus  1993   710     1
 ##  9 Russian Federation Sardina pilchardus  1992   627     1
 ## 10 Russian Federation Sardina pilchardus  1991   579     1
-## # … with 319 more rows
+## # ... with 319 more rows
 ```
 
 8. Which five countries caught the most cephalopods between 2008-2012?
@@ -738,7 +742,7 @@ fisheries_tidy %>%
 ##  8 India   Cephalopoda         2009    61
 ##  9 India   Cephalopoda         2010    60
 ## 10 Spain   Cephalopoda         2008    57
-## # … with 70 more rows
+## # ... with 70 more rows
 ```
 
 9. Which species had the highest catch total between 2008-2012? (hint: Osteichthyes is not a species)
@@ -770,8 +774,9 @@ species0812 %>%
 ##  8 Mugilidae            482
 ##  9 Rajiformes           427
 ## 10 Scombroidei          417
-## # … with 1,461 more rows
+## # ... with 1,461 more rows
 ```
+</div>
 
 10. Use the data to do at least one analysis of your choice.
 Country that made the most catches in 2005
@@ -798,7 +803,7 @@ fisheries_tidy %>%
 ##  8 South Africa              2005   987
 ##  9 Senegal                   2005   975
 ## 10 Argentina                 2005   971
-## # … with 9,860 more rows
+## # ... with 9,860 more rows
 ```
 
 ## Push your final code to GitHub!

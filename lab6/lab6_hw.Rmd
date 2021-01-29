@@ -91,6 +91,10 @@ fisheries_tidy %>%
 species<- fisheries$asfis_species_number[!duplicated(fisheries$asfis_species_number)]
 species
 ```
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 6. Which country had the largest overall catch in the year 2000?
 China 
@@ -133,6 +137,7 @@ species0812<- fisheries_tidy %>%
 species0812 %>% 
   count(asfis_species_name, sort = T)
 ```
+</div>
 
 10. Use the data to do at least one analysis of your choice.
 Country that made the most catches in 2005
