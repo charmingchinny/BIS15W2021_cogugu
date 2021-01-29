@@ -52,7 +52,7 @@ elephants
 ```{r}
 elephants %>% 
   tabyl(sex) %>% 
-  adorn_pct_formatting(digits=1)
+  adorn_pct_formatting(digits=2)
 ```
 **6. (2 points) What is the average age all elephants in the data?**
 ```{r}
