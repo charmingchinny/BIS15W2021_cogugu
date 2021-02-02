@@ -19,11 +19,18 @@ Make sure to use the formatting conventions of RMarkdown to make your report nea
 
 This exam is due by **12:00p on Thursday, January 28**.  
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 ## Load the tidyverse
 If you plan to use any other libraries to complete this assignment then you should load them here.
 ```{r message=FALSE, warning=FALSE}
 library(tidyverse)
+library(janitor)
+library(skimr)
 ```
+</div>
 
 ## Questions
 **1. (2 points) Briefly explain how R, RStudio, and GitHub work together to make work flows in data science transparent and repeatable. What is the advantage of using RMarkdown in this context?**  
@@ -34,10 +41,16 @@ library(tidyverse)
 
 In the midterm 1 folder there is a second folder called `data`. Inside the `data` folder, there is a .csv file called `ElephantsMF`. These data are from Phyllis Lee, Stirling University, and are related to Lee, P., et al. (2013), "Enduring consequences of early experiences: 40-year effects on survival and success among African elephants (Loxodonta africana)," Biology Letters, 9: 20130011. [kaggle](https://www.kaggle.com/mostafaelseidy/elephantsmf).  
 
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 **3. (2 points) Please load these data as a new object called `elephants`. Use the function(s) of your choice to get an idea of the structure of the data. Be sure to show the class of each variable.**
 ```{r}
 elephants<- readr::read_csv("data/ElephantsMF.csv")
 ```
+</div>
 ```{r}
 glimpse(elephants)
 ```
@@ -92,7 +105,7 @@ vertebrate<- janitor::clean_names(vertebrate)
 skim(vertebrate)
 ```
 ```{r}
-data_frame(vertebrate)
+data_frame(vertebrate) #this is unnecessary and doesn't perform a summary
 ```
 
 ```{r}
@@ -118,6 +131,7 @@ vertebrate_short <-vertebrate %>%
 vertebrate_long <- vertebrate %>% 
   filter(distance>=20)
 ```
+
 ```{r}
 vertebrate_short %>% 
 summarize(distance, ra_apes, ra_birds, ra_elephant, ra_monkeys, ra_rodent, ra_ungulate )
@@ -127,12 +141,14 @@ vertebrate_long %>%
   summarize(distance, ra_apes, ra_birds, ra_elephant, ra_monkeys, ra_rodent, ra_ungulate )
 ```
 
-
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 **12. (4 points) Based on your interest, do one exploratory analysis on the `gabon` data of your choice. This analysis needs to include a minimum of two functions in `dplyr.`**
 ```{r}
 vertebrate %>% 
-  group_by(land_use)
+  group_by(land_use) %>% 
   select(distance, land_use, veg_rich, rich_all_species)
-
 ```
-
+</div>

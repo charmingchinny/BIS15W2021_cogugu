@@ -1,12 +1,11 @@
 ---
 title: "Midterm 1"
 author: "Chinyere Ogugu"
-date: "2021-01-30"
+date: "2021-02-01"
 output:
   html_document: 
     theme: spacelab
     keep_md: yes
-  pdf_document: default
 ---
 
 
@@ -18,15 +17,19 @@ Make sure to use the formatting conventions of RMarkdown to make your report nea
 
 This exam is due by **12:00p on Thursday, January 28**.  
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 ## Load the tidyverse
 If you plan to use any other libraries to complete this assignment then you should load them here.
 
 ```r
 library(tidyverse)
 library(janitor)
-library(dplyr)
 library(skimr)
 ```
+</div>
 
 ## Questions
 **1. (2 points) Briefly explain how R, RStudio, and GitHub work together to make work flows in data science transparent and repeatable. What is the advantage of using RMarkdown in this context?**  
@@ -37,6 +40,11 @@ library(skimr)
 
 In the midterm 1 folder there is a second folder called `data`. Inside the `data` folder, there is a .csv file called `ElephantsMF`. These data are from Phyllis Lee, Stirling University, and are related to Lee, P., et al. (2013), "Enduring consequences of early experiences: 40-year effects on survival and success among African elephants (Loxodonta africana)," Biology Letters, 9: 20130011. [kaggle](https://www.kaggle.com/mostafaelseidy/elephantsmf).  
 
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 **3. (2 points) Please load these data as a new object called `elephants`. Use the function(s) of your choice to get an idea of the structure of the data. Be sure to show the class of each variable.**
 
 ```r
@@ -52,6 +60,7 @@ elephants<- readr::read_csv("data/ElephantsMF.csv")
 ##   Sex = col_character()
 ## )
 ```
+</div>
 
 ```r
 glimpse(elephants)
@@ -122,13 +131,9 @@ elephants %>%
 ```
 
 ```
-## `summarise()` ungrouping output (override with `.groups` argument)
-```
-
-```
 ## # A tibble: 2 x 3
 ##   sex   mean_age mean_height
-##   <fct>    <dbl>       <dbl>
+## * <fct>    <dbl>       <dbl>
 ## 1 F        12.8         190.
 ## 2 M         8.95        185.
 ```
@@ -148,13 +153,9 @@ elephant_age %>%
 ```
 
 ```
-## `summarise()` ungrouping output (override with `.groups` argument)
-```
-
-```
 ## # A tibble: 2 x 3
 ##   sex   mean_age mean_height
-##   <fct>    <dbl>       <dbl>
+## * <fct>    <dbl>       <dbl>
 ## 1 F         27.3        233.
 ## 2 M         26.6        273.
 ```
@@ -242,7 +243,7 @@ Table: Data summary
 |diversity_mammal_species |         0|             1|  1.70|  0.17|  1.38|  1.57|  1.70|  1.81|  2.06|▅▇▇▇▃ |
 
 ```r
-data_frame(vertebrate)
+data_frame(vertebrate) #this is unnecessary and doesn't perform a summary
 ```
 
 ```
@@ -297,13 +298,9 @@ vertebrate_intensity %>%
 ```
 
 ```
-## `summarise()` ungrouping output (override with `.groups` argument)
-```
-
-```
 ## # A tibble: 2 x 3
 ##   hunt_cat mean_bird_diversity mean_mammal_diversity
-##   <fct>                  <dbl>                 <dbl>
+## * <fct>                  <dbl>                 <dbl>
 ## 1 High                    1.66                  1.74
 ## 2 Moderate                1.62                  1.68
 ```
@@ -315,6 +312,7 @@ vertebrate_short <-vertebrate %>%
 vertebrate_long <- vertebrate %>% 
   filter(distance>=20)
 ```
+
 
 ```r
 vertebrate_short %>% 
@@ -344,28 +342,33 @@ vertebrate_long %>%
 ## 3     26.8    4.91     31.6        0          54.1      1.29        8.12
 ```
 
-
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 **12. (4 points) Based on your interest, do one exploratory analysis on the `gabon` data of your choice. This analysis needs to include a minimum of two functions in `dplyr.`**
 
 ```r
 vertebrate %>% 
-  select(land_use, veg_rich, rich_all_species)
+  group_by(land_use) %>% 
+  select(distance, land_use, veg_rich, rich_all_species)
 ```
 
 ```
-## # A tibble: 24 x 3
-##    land_use veg_rich rich_all_species
-##    <fct>       <dbl>            <dbl>
-##  1 Park         16.7               22
-##  2 Park         15.8               20
-##  3 Park         16.9               22
-##  4 Logging      12.4               19
-##  5 Park         17.1               20
-##  6 Park         16.5               22
-##  7 Park         14.8               23
-##  8 Logging      13.2               19
-##  9 Neither      12.6               19
-## 10 Logging      16                 19
+## # A tibble: 24 x 4
+## # Groups:   land_use [3]
+##    distance land_use veg_rich rich_all_species
+##       <dbl> <fct>       <dbl>            <dbl>
+##  1     7.14 Park         16.7               22
+##  2    17.3  Park         15.8               20
+##  3    18.3  Park         16.9               22
+##  4    20.8  Logging      12.4               19
+##  5    16.0  Park         17.1               20
+##  6    17.5  Park         16.5               22
+##  7    24.1  Park         14.8               23
+##  8    19.8  Logging      13.2               19
+##  9     5.78 Neither      12.6               19
+## 10     5.13 Logging      16                 19
 ## # … with 14 more rows
 ```
-
+</div>

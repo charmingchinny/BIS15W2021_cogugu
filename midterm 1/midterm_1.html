@@ -9,9 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Please Add Your Name Here" />
+<meta name="author" content="Chinyere Ogugu" />
 
-<meta name="date" content="2021-01-25" />
+<meta name="date" content="2021-02-01" />
 
 <title>Midterm 1</title>
 
@@ -398,8 +398,8 @@ summary {
 
 
 <h1 class="title toc-ignore">Midterm 1</h1>
-<h4 class="author">Please Add Your Name Here</h4>
-<h4 class="date">2021-01-25</h4>
+<h4 class="author">Chinyere Ogugu</h4>
+<h4 class="date">2021-02-01</h4>
 
 </div>
 
@@ -409,29 +409,599 @@ summary {
 <p>Answer the following questions and complete the exercises in RMarkdown. Please embed all of your code and push your final work to your repository. Your code should be organized, clean, and run free from errors. Be sure to <strong>add your name</strong> to the author header above. You may use any resources to answer these questions (including each other), but you may not post questions to Open Stacks or external help sites. There are 12 total questions.</p>
 <p>Make sure to use the formatting conventions of RMarkdown to make your report neat and clean!</p>
 <p>This exam is due by <strong>12:00p on Thursday, January 28</strong>.</p>
-</div>
-<div id="load-the-tidyverse" class="section level2">
-<h2>Load the tidyverse</h2>
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class="blue">
+<h2 id="load-the-tidyverse">Load the tidyverse</h2>
 <p>If you plan to use any other libraries to complete this assignment then you should load them here.</p>
-<pre class="r"><code>library(tidyverse)</code></pre>
+<pre class="r"><code>library(tidyverse)
+library(janitor)
+library(skimr)</code></pre>
+</div>
 </div>
 <div id="questions" class="section level2">
 <h2>Questions</h2>
-<p><strong>1. (2 points) Briefly explain how R, RStudio, and GitHub work together to make work flows in data science transparent and repeatable. What is the advantage of using RMarkdown in this context?</strong></p>
-<p><strong>2. (2 points) What are the three types of <code>data structures</code> that we have discussed? Why are we using data frames for BIS 15L?</strong></p>
+<p><strong>1. (2 points) Briefly explain how R, RStudio, and GitHub work together to make work flows in data science transparent and repeatable. What is the advantage of using RMarkdown in this context?</strong><br />
+#RStudio is a system that translates R code script language into an object or action. Github saves and organizes these transcripts into a place where they can be easily retrieved and shared. RMarkdown is useful in this context because you can put the code in annotated chunks and easily see the output and export these files in different formats.</p>
+<p><strong>2. (2 points) What are the three types of <code>data structures</code> that we have discussed? Why are we using data frames for BIS 15L?</strong> #Vector, Matrices, and data frames. We use data frames because the visual output is more organized and clean. It is also easier to manipulate rows and columns.</p>
 <p>In the midterm 1 folder there is a second folder called <code>data</code>. Inside the <code>data</code> folder, there is a .csv file called <code>ElephantsMF</code>. These data are from Phyllis Lee, Stirling University, and are related to Lee, P., et al. (2013), “Enduring consequences of early experiences: 40-year effects on survival and success among African elephants (Loxodonta africana),” Biology Letters, 9: 20130011. <a href="https://www.kaggle.com/mostafaelseidy/elephantsmf">kaggle</a>.</p>
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class="blue">
 <p><strong>3. (2 points) Please load these data as a new object called <code>elephants</code>. Use the function(s) of your choice to get an idea of the structure of the data. Be sure to show the class of each variable.</strong></p>
+<pre class="r"><code>elephants&lt;- readr::read_csv(&quot;data/ElephantsMF.csv&quot;)</code></pre>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   Age = col_double(),
+##   Height = col_double(),
+##   Sex = col_character()
+## )</code></pre>
+</div>
+<pre class="r"><code>glimpse(elephants)</code></pre>
+<pre><code>## Rows: 288
+## Columns: 3
+## $ Age    &lt;dbl&gt; 1.40, 17.50, 12.75, 11.17, 12.67, 12.67, 12.25, 12.17, 28.17, …
+## $ Height &lt;dbl&gt; 120.00, 227.00, 235.00, 210.00, 220.00, 189.00, 225.00, 204.00…
+## $ Sex    &lt;chr&gt; &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M…</code></pre>
 <p><strong>4. (2 points) Change the names of the variables to lower case and change the class of the variable <code>sex</code> to a factor.</strong></p>
+<pre class="r"><code>elephants&lt;- janitor::clean_names(elephants)
+elephants$sex&lt;-as.factor(elephants$sex)
+elephants</code></pre>
+<pre><code>## # A tibble: 288 x 3
+##      age height sex  
+##    &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;
+##  1   1.4   120  M    
+##  2  17.5   227  M    
+##  3  12.8   235  M    
+##  4  11.2   210  M    
+##  5  12.7   220  M    
+##  6  12.7   189  M    
+##  7  12.2   225  M    
+##  8  12.2   204  M    
+##  9  28.2   266. M    
+## 10  11.7   233  M    
+## # … with 278 more rows</code></pre>
 <p><strong>5. (2 points) How many male and female elephants are represented in the data?</strong></p>
+<pre class="r"><code>elephants %&gt;% 
+  tabyl(sex) %&gt;% 
+  adorn_pct_formatting(digits=2)</code></pre>
+<pre><code>##  sex   n percent
+##    F 150  52.08%
+##    M 138  47.92%</code></pre>
 <p><strong>6. (2 points) What is the average age all elephants in the data?</strong></p>
+<pre class="r"><code>mean(elephants$age)</code></pre>
+<pre><code>## [1] 10.97132</code></pre>
 <p><strong>7. (2 points) How does the average age and height of elephants compare by sex?</strong></p>
+<pre class="r"><code>elephants %&gt;% 
+  group_by(sex) %&gt;% 
+  summarize(mean_age=mean(age), mean_height=mean(height))</code></pre>
+<pre><code>## # A tibble: 2 x 3
+##   sex   mean_age mean_height
+## * &lt;fct&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+## 1 F        12.8         190.
+## 2 M         8.95        185.</code></pre>
 <p><strong>8. (2 points) How does the average height of elephants compare by sex for individuals over 25 years old. Include the min and max height as well as the number of individuals in the sample as part of your analysis.</strong></p>
+<pre class="r"><code>elephant_age&lt;- elephants %&gt;% 
+  filter(age&gt;= 25)</code></pre>
+<pre class="r"><code>elephant_age %&gt;% 
+  group_by(sex) %&gt;% 
+  summarize(mean_age=mean(age), mean_height=mean(height))</code></pre>
+<pre><code>## # A tibble: 2 x 3
+##   sex   mean_age mean_height
+## * &lt;fct&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+## 1 F         27.3        233.
+## 2 M         26.6        273.</code></pre>
 <p>For the next series of questions, we will use data from a study on vertebrate community composition and impacts from defaunation in <a href="https://en.wikipedia.org/wiki/Gabon">Gabon, Africa</a>. One thing to notice is that the data include 24 separate transects. Each transect represents a path through different forest management areas.</p>
 <p>Reference: Koerner SE, Poulsen JR, Blanchard EJ, Okouyi J, Clark CJ. Vertebrate community composition and diversity declines along a defaunation gradient radiating from rural villages in Gabon. <em>Journal of Applied Ecology</em>. 2016. This paper, along with a description of the variables is included inside the midterm 1 folder.</p>
 <p><strong>9. (2 points) Load <code>IvindoData_DryadVersion.csv</code> and use the function(s) of your choice to get an idea of the overall structure. Change the variables <code>HuntCat</code> and <code>LandUse</code> to factors.</strong></p>
+<pre class="r"><code>vertebrate&lt;- readr::read_csv(&quot;data/IvindoData_DryadVersion.csv&quot;)</code></pre>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   .default = col_double(),
+##   HuntCat = col_character(),
+##   LandUse = col_character()
+## )
+## ℹ Use `spec()` for the full column specifications.</code></pre>
+<pre class="r"><code>vertebrate&lt;- janitor::clean_names(vertebrate)</code></pre>
+<pre class="r"><code>skim(vertebrate)</code></pre>
+<table>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">vertebrate</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">24</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">26</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">24</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">hunt_cat</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">8</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">land_use</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">7</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">transect_id</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">13.50</td>
+<td align="right">8.51</td>
+<td align="right">1.00</td>
+<td align="right">5.75</td>
+<td align="right">14.50</td>
+<td align="right">20.25</td>
+<td align="right">27.00</td>
+<td align="left">▇▃▅▆▆</td>
+</tr>
+<tr class="even">
+<td align="left">distance</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">11.88</td>
+<td align="right">7.28</td>
+<td align="right">2.70</td>
+<td align="right">5.67</td>
+<td align="right">9.72</td>
+<td align="right">17.68</td>
+<td align="right">26.76</td>
+<td align="left">▇▂▂▅▂</td>
+</tr>
+<tr class="odd">
+<td align="left">num_households</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">37.88</td>
+<td align="right">17.80</td>
+<td align="right">13.00</td>
+<td align="right">24.75</td>
+<td align="right">29.00</td>
+<td align="right">54.00</td>
+<td align="right">73.00</td>
+<td align="left">▇▇▂▇▂</td>
+</tr>
+<tr class="even">
+<td align="left">veg_rich</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">14.83</td>
+<td align="right">2.07</td>
+<td align="right">10.88</td>
+<td align="right">13.10</td>
+<td align="right">14.94</td>
+<td align="right">16.54</td>
+<td align="right">18.75</td>
+<td align="left">▃▂▃▇▁</td>
+</tr>
+<tr class="odd">
+<td align="left">veg_stems</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">32.80</td>
+<td align="right">5.96</td>
+<td align="right">23.44</td>
+<td align="right">28.69</td>
+<td align="right">32.44</td>
+<td align="right">37.08</td>
+<td align="right">47.56</td>
+<td align="left">▆▇▆▃▁</td>
+</tr>
+<tr class="even">
+<td align="left">veg_liana</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">11.04</td>
+<td align="right">3.29</td>
+<td align="right">4.75</td>
+<td align="right">9.03</td>
+<td align="right">11.94</td>
+<td align="right">13.25</td>
+<td align="right">16.38</td>
+<td align="left">▃▂▃▇▃</td>
+</tr>
+<tr class="odd">
+<td align="left">veg_dbh</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">46.09</td>
+<td align="right">10.67</td>
+<td align="right">28.45</td>
+<td align="right">40.65</td>
+<td align="right">43.90</td>
+<td align="right">50.57</td>
+<td align="right">76.48</td>
+<td align="left">▂▇▃▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">veg_canopy</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.47</td>
+<td align="right">0.35</td>
+<td align="right">2.50</td>
+<td align="right">3.25</td>
+<td align="right">3.43</td>
+<td align="right">3.75</td>
+<td align="right">4.00</td>
+<td align="left">▁▁▇▅▇</td>
+</tr>
+<tr class="odd">
+<td align="left">veg_understory</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.02</td>
+<td align="right">0.34</td>
+<td align="right">2.38</td>
+<td align="right">2.88</td>
+<td align="right">3.00</td>
+<td align="right">3.17</td>
+<td align="right">3.88</td>
+<td align="left">▂▆▇▂▁</td>
+</tr>
+<tr class="even">
+<td align="left">ra_apes</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2.04</td>
+<td align="right">3.03</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.48</td>
+<td align="right">3.82</td>
+<td align="right">12.93</td>
+<td align="left">▇▂▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">ra_birds</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">58.64</td>
+<td align="right">14.71</td>
+<td align="right">31.56</td>
+<td align="right">52.51</td>
+<td align="right">57.89</td>
+<td align="right">68.18</td>
+<td align="right">85.03</td>
+<td align="left">▅▅▇▇▃</td>
+</tr>
+<tr class="even">
+<td align="left">ra_elephant</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.54</td>
+<td align="right">0.67</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.36</td>
+<td align="right">0.89</td>
+<td align="right">2.30</td>
+<td align="left">▇▂▂▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">ra_monkeys</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">31.30</td>
+<td align="right">12.38</td>
+<td align="right">5.84</td>
+<td align="right">22.70</td>
+<td align="right">31.74</td>
+<td align="right">39.88</td>
+<td align="right">54.12</td>
+<td align="left">▂▅▃▇▂</td>
+</tr>
+<tr class="even">
+<td align="left">ra_rodent</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.28</td>
+<td align="right">1.47</td>
+<td align="right">1.06</td>
+<td align="right">2.05</td>
+<td align="right">3.23</td>
+<td align="right">4.09</td>
+<td align="right">6.31</td>
+<td align="left">▇▅▇▃▃</td>
+</tr>
+<tr class="odd">
+<td align="left">ra_ungulate</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4.17</td>
+<td align="right">4.31</td>
+<td align="right">0.00</td>
+<td align="right">1.23</td>
+<td align="right">2.54</td>
+<td align="right">5.16</td>
+<td align="right">13.86</td>
+<td align="left">▇▂▁▁▂</td>
+</tr>
+<tr class="even">
+<td align="left">rich_all_species</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">20.21</td>
+<td align="right">2.06</td>
+<td align="right">15.00</td>
+<td align="right">19.00</td>
+<td align="right">20.00</td>
+<td align="right">22.00</td>
+<td align="right">24.00</td>
+<td align="left">▁▁▇▅▁</td>
+</tr>
+<tr class="odd">
+<td align="left">evenness_all_species</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.77</td>
+<td align="right">0.05</td>
+<td align="right">0.67</td>
+<td align="right">0.75</td>
+<td align="right">0.78</td>
+<td align="right">0.81</td>
+<td align="right">0.83</td>
+<td align="left">▃▁▅▇▇</td>
+</tr>
+<tr class="even">
+<td align="left">diversity_all_species</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2.31</td>
+<td align="right">0.15</td>
+<td align="right">1.97</td>
+<td align="right">2.25</td>
+<td align="right">2.32</td>
+<td align="right">2.43</td>
+<td align="right">2.57</td>
+<td align="left">▂▃▇▆▅</td>
+</tr>
+<tr class="odd">
+<td align="left">rich_bird_species</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">10.33</td>
+<td align="right">1.24</td>
+<td align="right">8.00</td>
+<td align="right">10.00</td>
+<td align="right">11.00</td>
+<td align="right">11.00</td>
+<td align="right">13.00</td>
+<td align="left">▃▅▇▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">evenness_bird_species</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.71</td>
+<td align="right">0.08</td>
+<td align="right">0.56</td>
+<td align="right">0.68</td>
+<td align="right">0.72</td>
+<td align="right">0.77</td>
+<td align="right">0.82</td>
+<td align="left">▅▁▇▆▇</td>
+</tr>
+<tr class="odd">
+<td align="left">diversity_bird_species</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.66</td>
+<td align="right">0.20</td>
+<td align="right">1.16</td>
+<td align="right">1.60</td>
+<td align="right">1.68</td>
+<td align="right">1.78</td>
+<td align="right">2.01</td>
+<td align="left">▂▂▅▇▃</td>
+</tr>
+<tr class="even">
+<td align="left">rich_mammal_species</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">9.88</td>
+<td align="right">1.68</td>
+<td align="right">6.00</td>
+<td align="right">9.00</td>
+<td align="right">10.00</td>
+<td align="right">11.00</td>
+<td align="right">12.00</td>
+<td align="left">▂▂▃▅▇</td>
+</tr>
+<tr class="odd">
+<td align="left">evenness_mammal_species</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.75</td>
+<td align="right">0.06</td>
+<td align="right">0.62</td>
+<td align="right">0.71</td>
+<td align="right">0.74</td>
+<td align="right">0.78</td>
+<td align="right">0.86</td>
+<td align="left">▂▃▇▂▅</td>
+</tr>
+<tr class="even">
+<td align="left">diversity_mammal_species</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.70</td>
+<td align="right">0.17</td>
+<td align="right">1.38</td>
+<td align="right">1.57</td>
+<td align="right">1.70</td>
+<td align="right">1.81</td>
+<td align="right">2.06</td>
+<td align="left">▅▇▇▇▃</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>data_frame(vertebrate) #this is unnecessary and doesn&#39;t perform a summary</code></pre>
+<pre><code>## Warning: `data_frame()` is deprecated as of tibble 1.1.0.
+## Please use `tibble()` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
+<pre><code>## # A tibble: 24 x 26
+##    transect_id distance hunt_cat num_households land_use veg_rich veg_stems
+##          &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;             &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+##  1           1     7.14 Moderate             54 Park         16.7      31.2
+##  2           2    17.3  None                 54 Park         15.8      37.4
+##  3           2    18.3  None                 29 Park         16.9      32.3
+##  4           3    20.8  None                 29 Logging      12.4      29.4
+##  5           4    16.0  None                 29 Park         17.1      36  
+##  6           5    17.5  None                 29 Park         16.5      29.2
+##  7           6    24.1  None                 29 Park         14.8      31.2
+##  8           7    19.8  None                 54 Logging      13.2      32.6
+##  9           8     5.78 High                 25 Neither      12.6      23.7
+## 10           9     5.13 High                 73 Logging      16        27.1
+## # … with 14 more rows, and 19 more variables: veg_liana &lt;dbl&gt;, veg_dbh &lt;dbl&gt;,
+## #   veg_canopy &lt;dbl&gt;, veg_understory &lt;dbl&gt;, ra_apes &lt;dbl&gt;, ra_birds &lt;dbl&gt;,
+## #   ra_elephant &lt;dbl&gt;, ra_monkeys &lt;dbl&gt;, ra_rodent &lt;dbl&gt;, ra_ungulate &lt;dbl&gt;,
+## #   rich_all_species &lt;dbl&gt;, evenness_all_species &lt;dbl&gt;,
+## #   diversity_all_species &lt;dbl&gt;, rich_bird_species &lt;dbl&gt;,
+## #   evenness_bird_species &lt;dbl&gt;, diversity_bird_species &lt;dbl&gt;,
+## #   rich_mammal_species &lt;dbl&gt;, evenness_mammal_species &lt;dbl&gt;,
+## #   diversity_mammal_species &lt;dbl&gt;</code></pre>
+<pre class="r"><code>vertebrate$hunt_cat&lt;-as.factor(vertebrate$hunt_cat)
+vertebrate$land_use&lt;-as.factor(vertebrate$land_use)</code></pre>
 <p><strong>10. (4 points) For the transects with high and moderate hunting intensity, how does the average diversity of birds and mammals compare?</strong></p>
+<pre class="r"><code>vertebrate_intensity &lt;- vertebrate %&gt;% 
+  filter(hunt_cat != &quot;None&quot;)</code></pre>
+<pre class="r"><code>vertebrate_intensity %&gt;% 
+  group_by(hunt_cat) %&gt;% 
+  summarize(mean_bird_diversity=mean(diversity_bird_species), mean_mammal_diversity=mean(diversity_mammal_species))</code></pre>
+<pre><code>## # A tibble: 2 x 3
+##   hunt_cat mean_bird_diversity mean_mammal_diversity
+## * &lt;fct&gt;                  &lt;dbl&gt;                 &lt;dbl&gt;
+## 1 High                    1.66                  1.74
+## 2 Moderate                1.62                  1.68</code></pre>
 <p><strong>11. (4 points) One of the conclusions in the study is that the relative abundance of animals drops off the closer you get to a village. Let’s try to reconstruct this (without the statistics). How does the relative abundance (RA) of apes, birds, elephants, monkeys, rodents, and ungulates compare between sites that are less than 5km from a village to sites that are greater than 20km from a village? The variable <code>Distance</code> measures the distance of the transect from the nearest village. Hint: try using the <code>across</code> operator.</strong></p>
+<pre class="r"><code>vertebrate_short &lt;-vertebrate %&gt;% 
+  filter(distance&lt;=5)
+vertebrate_long &lt;- vertebrate %&gt;% 
+  filter(distance&gt;=20)</code></pre>
+<pre class="r"><code>vertebrate_short %&gt;% 
+summarize(distance, ra_apes, ra_birds, ra_elephant, ra_monkeys, ra_rodent, ra_ungulate )</code></pre>
+<pre><code>## # A tibble: 3 x 7
+##   distance ra_apes ra_birds ra_elephant ra_monkeys ra_rodent ra_ungulate
+##      &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+## 1     2.7     0        85.0       0.290       9.09      3.74        1.86
+## 2     3.83    0        57.8       0          37.8       3.19        1.04
+## 3     2.92    0.24     68.2       0          25.6       4.05        1.88</code></pre>
+<pre class="r"><code>vertebrate_long %&gt;% 
+  summarize(distance, ra_apes, ra_birds, ra_elephant, ra_monkeys, ra_rodent, ra_ungulate )</code></pre>
+<pre><code>## # A tibble: 3 x 7
+##   distance ra_apes ra_birds ra_elephant ra_monkeys ra_rodent ra_ungulate
+##      &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+## 1     20.8   12.9      59.3        0.56       19.8      3.66        3.71
+## 2     24.1    3.78     42.7        1.11       46.2      3.1         3.1 
+## 3     26.8    4.91     31.6        0          54.1      1.29        8.12</code></pre>
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class="blue">
 <p><strong>12. (4 points) Based on your interest, do one exploratory analysis on the <code>gabon</code> data of your choice. This analysis needs to include a minimum of two functions in <code>dplyr.</code></strong></p>
+<pre class="r"><code>vertebrate %&gt;% 
+  group_by(land_use) %&gt;% 
+  select(distance, land_use, veg_rich, rich_all_species)</code></pre>
+<pre><code>## # A tibble: 24 x 4
+## # Groups:   land_use [3]
+##    distance land_use veg_rich rich_all_species
+##       &lt;dbl&gt; &lt;fct&gt;       &lt;dbl&gt;            &lt;dbl&gt;
+##  1     7.14 Park         16.7               22
+##  2    17.3  Park         15.8               20
+##  3    18.3  Park         16.9               22
+##  4    20.8  Logging      12.4               19
+##  5    16.0  Park         17.1               20
+##  6    17.5  Park         16.5               22
+##  7    24.1  Park         14.8               23
+##  8    19.8  Logging      13.2               19
+##  9     5.78 Neither      12.6               19
+## 10     5.13 Logging      16                 19
+## # … with 14 more rows</code></pre>
+</div>
 </div>
 
 
