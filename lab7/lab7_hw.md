@@ -1,7 +1,7 @@
 ---
 title: "Lab 7 Homework"
 author: "Chinyere Ogugu"
-date: "2021-02-02"
+date: "2021-02-03"
 output:
   html_document: 
     theme: spacelab
@@ -36,7 +36,7 @@ getwd()
 ```
 
 ```
-## [1] "/Users/chinyereogugu/Desktop/BIS15W2021_cogugu/lab7"
+## [1] "D:/TA files/Winter2021 BIS15L/students_rep/BIS15W2021_cogugu/lab7"
 ```
 
 
@@ -46,7 +46,7 @@ amniota <- readr::read_csv("data/amniota.csv")
 
 ```
 ## 
-## ── Column specification ────────────────────────────────────────────────────────
+## -- Column specification --------------------------------------------------------
 ## cols(
 ##   .default = col_double(),
 ##   class = col_character(),
@@ -56,7 +56,7 @@ amniota <- readr::read_csv("data/amniota.csv")
 ##   species = col_character(),
 ##   common_name = col_character()
 ## )
-## ℹ Use `spec()` for the full column specifications.
+## i Use `spec()` for the full column specifications.
 ```
 
 `amphibio` data:  
@@ -70,7 +70,7 @@ amphibio <- readr::read_csv("data/amphibio.csv")
 
 ```
 ## 
-## ── Column specification ────────────────────────────────────────────────────────
+## -- Column specification --------------------------------------------------------
 ## cols(
 ##   .default = col_double(),
 ##   id = col_character(),
@@ -81,7 +81,7 @@ amphibio <- readr::read_csv("data/amphibio.csv")
 ##   Seeds = col_logical(),
 ##   OBS = col_logical()
 ## )
-## ℹ Use `spec()` for the full column specifications.
+## i Use `spec()` for the full column specifications.
 ```
 
 ```
@@ -301,7 +301,7 @@ naniar::miss_var_summary(amniota_tidy)
 ##  8 egg_length_mm                   20702     97.1
 ##  9 weaning_weight_g                20258     95.0
 ## 10 female_svl_cm                   20242     94.9
-## # … with 26 more rows
+## # ... with 26 more rows
 ```
 
 **7. Use the package `naniar` to produce a summary, including percentages, of missing data in each column for the `amphibio` data.**
@@ -324,8 +324,12 @@ naniar::miss_var_summary(amphibio)
 ##  8 Wet_cold   6625     97.8
 ##  9 Crepu      6608     97.5
 ## 10 Dry_warm   6572     97.0
-## # … with 28 more rows
+## # ... with 28 more rows
 ```
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 **8. For the `amniota` data, calculate the number of NAs in the `egg_mass_g` column sorted by taxonomic class; i.e. how many NA's are present in the `egg_mass_g` column in birds, mammals, and reptiles? Does this results make sense biologically? How do these results affect your interpretation of NA's?** 
 
@@ -343,6 +347,7 @@ summarize(number_nas= sum(is.na(egg_mass_g)))
 ##        <int>
 ## 1      15907
 ```
+</div>
 
 **9. The `amphibio` data have variables that classify species as fossorial (burrowing), terrestrial, aquatic, or arboreal.Calculate the number of NA's in each of these variables. Do you think that the authors intend us to think that there are NA's in these columns or could they represent something else? Explain.**
 
@@ -377,7 +382,7 @@ amniota_modified <- readr::read_csv("data/amniota.csv", na= c("-999"))
 
 ```
 ## 
-## ── Column specification ────────────────────────────────────────────────────────
+## -- Column specification --------------------------------------------------------
 ## cols(
 ##   .default = col_double(),
 ##   class = col_character(),
@@ -397,7 +402,7 @@ amniota_modified <- readr::read_csv("data/amniota.csv", na= c("-999"))
 ##   female_body_mass_at_maturity_g = col_logical(),
 ##   no_sex_svl_cm = col_logical()
 ## )
-## ℹ Use `spec()` for the full column specifications.
+## i Use `spec()` for the full column specifications.
 ```
 
 ```
