@@ -1,7 +1,7 @@
 ---
 title: "Lab 8 Homework"
 author: "Chinyere Ogugu"
-date: "2021-02-03"
+date: "2021-02-04"
 output:
   html_document: 
     theme: spacelab
@@ -171,7 +171,7 @@ sydneybeaches
 
 2. Are these data "tidy" per the definitions of the tidyverse? How do you know? Are they in wide or long format?
 
-### Yes they are tidy because they the variables have their own columns, and each observation has their own row. Each value has its own cell. 
+### Yes they are tidy because the variables have their own columns, and each observation has its own row. Each value has its own cell. 
 
 3. We are only interested in the variables site, date, and enterococci_cfu_100ml. Make a new object focused on these variables only. Name the object `sydneybeaches_long`
 
