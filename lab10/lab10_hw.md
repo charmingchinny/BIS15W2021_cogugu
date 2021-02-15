@@ -1,7 +1,7 @@
 ---
 title: "Lab 10 Homework"
 author: "Chinyere Ogugu"
-date: "2021-02-11"
+date: "2021-02-15"
 output:
   html_document: 
     theme: spacelab
@@ -33,7 +33,7 @@ deserts <- read_csv(here("lab10", "data", "surveys_complete.csv"))
 
 ```
 ## 
-## ── Column specification ────────────────────────────────────────────────────────
+## -- Column specification --------------------------------------------------------
 ## cols(
 ##   record_id = col_double(),
 ##   month = col_double(),
@@ -131,7 +131,7 @@ deserts %>%
 ##  8 flavus        1597
 ##  9 eremicus      1299
 ## 10 albigula      1252
-## # … with 30 more rows
+## # ... with 30 more rows
 ```
 
 ```r
@@ -153,7 +153,7 @@ deserts %>%
 ##  8 Ammospermophilus   437
 ##  9 Amphispiza         303
 ## 10 Spermophilus       249
-## # … with 16 more rows
+## # ... with 16 more rows
 ```
 
 3. What is the proportion of taxa included in this study? Show a table and plot that reflects this count.
@@ -238,7 +238,7 @@ deserts %>%
 ##  8  1984 merriami       951
 ##  9  1985 merriami      1416
 ## 10  1986 merriami       922
-## # … with 16 more rows
+## # ... with 16 more rows
 ```
 
 
@@ -264,6 +264,10 @@ deserts %>%
 ```
 
 ![](lab10_hw_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 9. Which two species have, on average, the highest weight? Once you have identified them, make a new column that is a ratio of `weight` to `hindfoot_length`. Make a plot that shows the range of this new ratio and fill by sex.
 
@@ -273,10 +277,6 @@ deserts %>%
   filter(weight!= "NA") %>% 
   summarise(avg_weight=mean(weight)) %>% 
   arrange(desc(avg_weight))
-```
-
-```
-## `summarise()` ungrouping output (override with `.groups` argument)
 ```
 
 ```
@@ -293,9 +293,9 @@ deserts %>%
 ##  8 merriami           43.2
 ##  9 baileyi            31.7
 ## 10 leucogaster        31.6
-## # … with 12 more rows
+## # ... with 12 more rows
 ```
-
+</div>
 
 10. Make one plot of your choice! Make sure to include at least two of the aesthetics options you have learned.
 
