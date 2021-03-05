@@ -43,6 +43,10 @@ for (i in 1:length(US_collar2)){
   )
 }
 ```
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 **2. Please load all the data files from `us_individual_collar_data` and combine all data into one data frame. Create a summary to show what is the maximum and minimum of recorded data points on longitude and latitude.**
 ```{r}
@@ -83,6 +87,7 @@ for (i in 1:length(US_collar2)){
   )
 }
 ```
+</div>
 
 ## Load the Data
 We will use the data from an experiment on hypertension in the mouse [Sugiyama et al., Genomics 71:70-77, 2001](https://www.sciencedirect.com/science/article/pii/S0888754300964012?via%3Dihub)
@@ -131,6 +136,10 @@ summary(hyper_qtlanalysis)
 ```{r}
 plot(hyper_qtlanalysis, ylab="LOD Score")
 ```
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 **9. Based on your genome scan results, create a table which only includes those chromosomes with LOD > 1. Creates an interactive chart with LOD curves linked to estimated QTL effects for only those chromosomes with LOD > 1. Find the gene maker with the highest LOD score and describe how does the genetype of this marker influence the individual's phenotype.**
 ```{r}
@@ -140,10 +149,12 @@ summary(hyper_qtlanalysis, threshold=1)
 iplotScanone(hyper_qtlanalysis, chr =c(1,2,4,5,6,15))
 ```
 ### The higher the LOD score the higher chance that a gene can be linked to a certain phenotype, that genotype has a higher chance of expressing high blood pressure. 
+
 **10. Please save your interactive chart from Q9 as a html file `hyper_iplotScanone.html` and make sure your upload it to your github repository with your lab14 homework as well.**
 ```{r}
 
 ```
+</div>
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences. 
