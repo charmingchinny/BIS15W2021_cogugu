@@ -1,7 +1,7 @@
 ---
 title: "Lab 11 Homework"
 author: "Chinyere Ogugu"
-date: "2021-02-21"
+date: "2021-03-15"
 output:
   html_document: 
     theme: spacelab
@@ -89,13 +89,9 @@ gapminder %>%
 ```
 
 ```
-## `summarise()` ungrouping output (override with `.groups` argument)
-```
-
-```
 ## # A tibble: 12 x 2
 ##     year mean_lifeExp
-##    <int>        <dbl>
+##  * <int>        <dbl>
 ##  1  1952         49.1
 ##  2  1957         51.5
 ##  3  1962         53.6
@@ -118,10 +114,6 @@ gapminder %>%
    ggplot(aes(x = as.factor(year), y=mean_lifeExp, group = 1)) +
   geom_line()+ 
   labs(title = "Change in Life Expectancy", x = "Year", y = "Ave. Life Expectancy")
-```
-
-```
-## `summarise()` ungrouping output (override with `.groups` argument)
 ```
 
 ![](lab11_hw_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
@@ -149,7 +141,7 @@ gapminder %>%
 ```
 
 ```
-## `summarise()` regrouping output by 'continent' (override with `.groups` argument)
+## `summarise()` has grouped output by 'continent'. You can override using the `.groups` argument.
 ```
 
 ```
@@ -167,7 +159,7 @@ gapminder %>%
 ##  8 Africa     1987  39.9  53.3  71.9
 ##  9 Africa     1992  23.6  53.6  73.6
 ## 10 Africa     1997  36.1  53.6  74.8
-## # … with 50 more rows
+## # ... with 50 more rows
 ```
 
 
@@ -184,7 +176,7 @@ gapminder %>%
 ```
 
 ```
-## `summarise()` regrouping output by 'year' (override with `.groups` argument)
+## `summarise()` has grouped output by 'year'. You can override using the `.groups` argument.
 ```
 
 ![](lab11_hw_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
@@ -227,7 +219,7 @@ gapminder %>%
 ##  8 Nigeria        33119096  135031164 101912068
 ##  9 Mexico         30144317  108700891  78556574
 ## 10 Philippines    22438691   91077287  68638596
-## # … with 132 more rows
+## # ... with 132 more rows
 ```
 
 **8. Use your results from the question above to plot population growth for the top five countries since 1952.**
@@ -251,7 +243,7 @@ gapminder %>%
 ```
 
 ![](lab11_hw_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
-
+# Didn't use faceting
 **10. Make one plot of your choice that uses faceting!**
 
 ```r
@@ -274,7 +266,7 @@ gapminder %>%
 ##  8 Nigeria        2007  135031164
 ##  9 Japan          2007  127467972
 ## 10 Mexico         2007  108700891
-## # … with 132 more rows
+## # ... with 132 more rows
 ```
 
 ```r

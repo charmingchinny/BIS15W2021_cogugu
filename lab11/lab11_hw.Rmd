@@ -125,7 +125,7 @@ gapminder %>%
   ggplot(aes(x=year, y=gdpPercap, group=country, color=country))+
   geom_line()+ labs (title= "GDP per Capita since 1952",x="year" , y= "gdp per capita")
 ```
-
+# Didn't use faceting
 **10. Make one plot of your choice that uses faceting!**
 ```{r}
 gapminder %>% 
